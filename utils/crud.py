@@ -11,14 +11,14 @@ def add_new_user(users: list) -> None:
     users.append(new_user)
 
 
-def search_users(users: list) -> None:
+def search_user(users: list) -> None:
     kogo_szukasz = input("Kogo szukasz: ")
     for user in users:
         if user['name'] == kogo_szukasz:
             print(user)
 
 
-def remove_users(users)->None:
+def remove_user(users)->None:
     kogo_szukasz=input("Kogo szukasz: ")
     for user in users:
         if user['name']==kogo_szukasz:

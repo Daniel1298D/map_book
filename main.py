@@ -1,19 +1,21 @@
 from models.data import users
-from utils.crud import show_users,add_new_user,search_users,remove_users,update_user
+from utils.crud import show_users,add_new_user,search_user,remove_user,update_user
+
+
 
 if __name__ == "__main__":
-    print("witaj użytkowniku")
+    print("Witaj użytkowniku")
     while True:
-        print("MENU:")
-        print("0. zakończ program")
-        print("1. wyswietl co u znajomych")
-        print("2.Dodaj użytkownika")
-        print("3. znajdź użytkownika")
+        print("Menu:")
+        print("0. Zakończ program")
+        print("1. Wyswietl co u znajomych")
+        print("2. Dodaj użytkownika")
+        print("3. Znajdź użytkownika")
+        print("4. Usuń użytkownika")
+        print("5. Modyfikuj użytkownika")
+        menu_option: str = input("Dokonaj wyboru:")
         if menu_option == "0":
-            print("program kończy pracę")
-            print("4. usuń użytkownika")
-            print("5. Modyfikuj znajomego")
-            menu_option: str = input("dokonaj wyboru:")
+            print("Program kończy pracę")
             break
         if menu_option == "1":
             show_users(users)
@@ -22,6 +24,6 @@ if __name__ == "__main__":
         if menu_option == "3":
             search_user(users)
         if menu_option == "4":
-            remove_users(users)
+            remove_user(users)
         if menu_option == "5":
             update_user(users)
