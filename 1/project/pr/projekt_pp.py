@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import requests
 import logging
 
-logging.basicConfig(filename='program.log', level=logging.INFO,
+logging.basicConfig(filename='../program.log', level=logging.INFO,
                     format='%(asctime)s %(levelname)s: %(message)s')
 
 uzytkownicy = {
