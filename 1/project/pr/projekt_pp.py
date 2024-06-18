@@ -85,7 +85,7 @@ class Pracownik(User):
         self.firma = firma
         self.firma.pracownicy.append(self)
 
-def pokaz_entitety(lista_entitetow, lista):
+def pokaz_dane(lista_entitetow, lista):
     lista.delete(0, END)
     for entity in lista_entitetow:
         lista.insert(END, f'{entity.nazwa} - {entity.lokalizacja}')
@@ -94,7 +94,7 @@ def dodaj_firme():
     nazwa = entry_firma_nazwa.get()
     lokalizacja = entry_firma_lokalizacja.get()
     Biura(nazwa, lokalizacja, widget_mapy)
-    pokaz_entitety(firmy, listbox_firmy)
+    pokaz_dane(firmy, listbox_firmy)
     entry_firma_nazwa.delete(0, END)
     entry_firma_lokalizacja.delete(0, END)
 
@@ -105,7 +105,7 @@ def dodaj_klienta():
     firma = next((f for f in firmy if f.nazwa == nazwa_firmy), None)
     if firma:
         Klient(nazwa, lokalizacja, firma, widget_mapy)
-        pokaz_entitety(klienci, listbox_klienci)
+        pokaz_dane(klienci, listbox_klienci)
         entry_klient_nazwa.delete(0, END)
         entry_klient_lokalizacja.delete(0, END)
         entry_klient_firma.delete(0, END)
@@ -117,7 +117,7 @@ def dodaj_pracownika():
     firma = next((f for f in firmy if f.nazwa == nazwa_firmy), None)
     if firma:
         Pracownik(nazwa, lokalizacja, firma, widget_mapy)
-        pokaz_entitety(pracownicy, listbox_pracownicy)
+        pokaz_dane(pracownicy, listbox_pracownicy)
         entry_pracownik_nazwa.delete(0, END)
         entry_pracownik_lokalizacja.delete(0, END)
         entry_pracownik_firma.delete(0, END)
@@ -127,13 +127,13 @@ def usun_User(lista_entitetow, lista):
     entity = lista_entitetow[selected_index]
     entity.usun_marker()
     lista_entitetow.pop(selected_index)
-    pokaz_entitety(lista_entitetow, lista)
+    pokaz_dane(lista_entitetow, lista)
 
 def pokaz_szczegoly_firmy():
     selected_index = listbox_firmy.curselection()[0]
     firma = firmy[selected_index]
-    pokaz_entitety(firma.klienci, listbox_klienci)
-    pokaz_entitety(firma.pracownicy, listbox_pracownicy)
+    pokaz_dane(firma.klienci, listbox_klienci)
+    pokaz_dane(firma.pracownicy, listbox_pracownicy)
 
 def edytuj_firme():
     global current_edit
@@ -175,7 +175,7 @@ def update_firma():
             firma.lokalizacja = entry_firma_lokalizacja.get()
             firma.koordynaty = firma.pobierz_koordynaty()
             firma.marker = widget_mapy.set_marker(firma.koordynaty[0], firma.koordynaty[1], text=firma.nazwa)
-            pokaz_entitety(firmy, listbox_firmy)
+            pokaz_dane(firmy, listbox_firmy)
             button_firma.config(text="Wprowadź dane", command=dodaj_firme)
             current_edit = None
             entry_firma_nazwa.delete(0, END)
@@ -192,7 +192,7 @@ def update_klient():
             klient.lokalizacja = entry_klient_lokalizacja.get()
             klient.koordynaty = klient.pobierz_koordynaty()
             klient.marker = widget_mapy.set_marker(klient.koordynaty[0], klient.koordynaty[1], text=klient.nazwa)
-            pokaz_entitety(klienci, listbox_klienci)
+            pokaz_dane(klienci, listbox_klienci)
             button_klient.config(text="Wprowadź dane", command=dodaj_klienta)
             current_edit = None
             entry_klient_nazwa.delete(0, END)
@@ -210,7 +210,7 @@ def update_pracownik():
             pracownik.lokalizacja = entry_pracownik_lokalizacja.get()
             pracownik.koordynaty = pracownik.pobierz_koordynaty()
             pracownik.marker = widget_mapy.set_marker(pracownik.koordynaty[0], pracownik.koordynaty[1], text=pracownik.nazwa)
-            pokaz_entitety(pracownicy, listbox_pracownicy)
+            pokaz_dane(pracownicy, listbox_pracownicy)
             button_pracownik.config(text="Wprowadź dane", command=dodaj_pracownika)
             current_edit = None
             entry_pracownik_nazwa.delete(0, END)
